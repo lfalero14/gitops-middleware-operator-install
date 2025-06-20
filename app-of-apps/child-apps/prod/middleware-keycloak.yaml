@@ -1,0 +1,47 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: prod-child-keycloak-install
+  namespace: openshift-gitops
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+spec:
+  generators:
+    - clusters:
+        selector:
+          matchLabels:
+            env: prod
+  template:
+    metadata:
+      name: "{{name}}-keycloak-install"
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/lfalero14/gitops-middleware-operator-install.git
+        targetRevision: HEAD
+        path: "./manifests/middleware-keycloak/overlays/prod"
+        kustomize:
+          patches:
+            - target:
+                kind: OperatorGroup
+                name: rhbk-operator
+              patch: |-
+                - op: add
+                  path: /spec/targetNamespaces/0
+                  value: "keycloak"
+            - target:
+                kind: RoleBinding
+                name: hook-binding
+              patch: |-
+                - op: add
+                  path: /subjects/0/namespace
+                  value: "keycloak"
+      destination:
+        server: "{{server}}"
+        namespace: "keycloak"
+      syncPolicy:
+        syncOptions:
+          - CreateNamespace=true
+        automated:
+          prune: true
+          selfHeal: true
