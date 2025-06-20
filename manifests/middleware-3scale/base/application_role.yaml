@@ -5,10 +5,15 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "3"
 rules:
+  - apiGroups: ["operators.coreos.com"]
+    resources: ["subscriptions"]
+    verbs: ["get", "list"]
+  - apiGroups: ["operators.coreos.com"]
+    resources: ["clusterserviceversions"]
+    verbs: ["get", "list"]
   - apiGroups: ["apps.3scale.net"]
     resources: ["apimanagers"]
     verbs: ["get", "list"]
-
   - apiGroups: ["capabilities.3scale.net"]
     resources: ["tenants"]
     verbs: ["get", "list"]
