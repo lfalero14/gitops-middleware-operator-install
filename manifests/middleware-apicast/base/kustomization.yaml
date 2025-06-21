@@ -6,5 +6,3 @@ resources:
   - operator_namespace.yaml
   - operator_operatorgroup.yaml
   - operator_post-hook.yaml
-patchesStrategicMerge:
-  - application_role.yaml
