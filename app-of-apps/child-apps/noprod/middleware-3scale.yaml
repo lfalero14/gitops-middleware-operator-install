@@ -36,6 +36,9 @@ spec:
                 - op: add
                   path: /subjects/0/namespace
                   value: "3scale"
+                - op: add
+                  path: /subjects/1/namespace
+                  value: "apicast-gateway"
       destination:
         server: "{{server}}"
         namespace: "3scale"

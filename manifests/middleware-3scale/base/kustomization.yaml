@@ -8,3 +8,4 @@ resources:
   - operator_post-hook.yaml
 patchesStrategicMerge:
   - application_role.yaml
+  - application_role-binding.yaml
