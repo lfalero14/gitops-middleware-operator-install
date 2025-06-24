@@ -18,7 +18,7 @@ spec:
       project: default
       source:
         repoURL: https://github.com/lfalero14/gitops-middleware-operator-install.git
-        targetRevision: HEAD
+        targetRevision: develop
         path: "./manifests/middleware-keycloak/overlays/prod"
         kustomize:
           patches:
@@ -42,6 +42,6 @@ spec:
       syncPolicy:
         syncOptions:
           - CreateNamespace=true
-        automated:
-          prune: true
-          selfHeal: true
+        #automated:
+          #prune: true
+          #selfHeal: true
