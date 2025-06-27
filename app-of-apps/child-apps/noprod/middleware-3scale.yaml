@@ -36,13 +36,6 @@ spec:
                 - op: add
                   path: /metadata/name
                   value: "{{namespace}}"
-            - target:
-                kind: OperatorGroup
-                name: 3scale-operator
-              patch: |-
-                - op: add
-                  path: /spec/targetNamespaces/0
-                  value: "{{namespace}}"
       destination:
         server: "{{server}}"
         namespace: "{{namespace}}"
