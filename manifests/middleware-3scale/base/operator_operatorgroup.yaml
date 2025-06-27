@@ -5,4 +5,5 @@ metadata:
     argocd.argoproj.io/sync-wave: "1"
   name: 3scale-operator
 spec:
-  targetNamespaces: []
+  #targetNamespaces: []
+  upgradeStrategy: Default
