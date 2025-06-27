@@ -6,4 +6,4 @@ metadata:
     openshift.io/description: "Red Hat 3scale API Management"
     openshift.io/node-selector: node-role.kubernetes.io/worker-3scale=
     argocd.argoproj.io/sync-wave: "0"
-  name: 3scale
+  name: 3scale-tmp

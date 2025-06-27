@@ -31,6 +31,13 @@ spec:
           patches:
             - target:
                 kind: OperatorGroup
+                name: 3scale-tmp
+              patch: |-
+                - op: add
+                  path: /metadata/name
+                  value: "{{namespace}}"
+            - target:
+                kind: OperatorGroup
                 name: 3scale-operator
               patch: |-
                 - op: add
