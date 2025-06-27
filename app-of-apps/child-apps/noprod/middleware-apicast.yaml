@@ -15,6 +15,7 @@ spec:
                   env: noprod
           - list:
               elements:
+                - namespace: 3scale
                 - namespace: 3scale-tenant-dev
                 - namespace: 3scale-tenant-testing
   template:
