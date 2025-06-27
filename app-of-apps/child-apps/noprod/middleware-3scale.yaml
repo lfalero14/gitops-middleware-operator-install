@@ -30,7 +30,7 @@ spec:
         kustomize:
           patches:
             - target:
-                kind: OperatorGroup
+                kind: Namespace
                 name: 3scale-tmp
               patch: |-
                 - op: add
