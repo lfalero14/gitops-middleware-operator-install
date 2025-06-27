@@ -19,7 +19,7 @@ spec:
                 - namespace: 3scale-tenant-testing
   template:
     metadata:
-      name: "{{name}}-apicast-install"
+      name: "{{name}}-{{namespace}}-apicast"
     spec:
       project: default
       source:
