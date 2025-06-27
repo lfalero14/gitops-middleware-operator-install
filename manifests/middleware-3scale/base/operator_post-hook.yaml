@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: post-sync-check-operator
+  name: post-sync-check-3scale-operator
   annotations:
     argocd.argoproj.io/hook: PostSync
 spec:

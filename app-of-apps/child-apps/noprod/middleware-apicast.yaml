@@ -26,22 +26,6 @@ spec:
         repoURL: https://github.com/lfalero14/gitops-middleware-operator-install.git
         targetRevision: develop
         path: "./manifests/middleware-apicast/overlays/noprod"
-        kustomize:
-          patches:
-            - target:
-                kind: OperatorGroup
-                name: apicast-operator
-              patch: |-
-                - op: add
-                  path: /spec/targetNamespaces/0
-                  value: "{{namespace}}"
-            - target:
-                kind: RoleBinding
-                name: hook-binding
-              patch: |-
-                - op: add
-                  path: /subjects/0/namespace
-                  value: "{{namespace}}"
       destination:
         server: "{{server}}"
         namespace: "{{namespace}}"
