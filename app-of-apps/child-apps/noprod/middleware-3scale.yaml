@@ -7,10 +7,17 @@ metadata:
     argocd.argoproj.io/sync-wave: "0"
 spec:
   generators:
-    - clusters:
-        selector:
-          matchLabels:
-            env: noprod
+    - matrix:
+        generators:
+          - clusters:
+              selector:
+                matchLabels:
+                  env: noprod
+          - list:
+              elements:
+                - namespace: 3scale
+                - namespace: 3scale-tenant-dev
+                - namespace: 3scale-tenant-testing
   template:
     metadata:
       name: "{{name}}-3scale-install"
@@ -28,23 +35,13 @@ spec:
               patch: |-
                 - op: add
                   path: /spec/targetNamespaces/0
-                  value: "3scale"
-            - target:
-                kind: RoleBinding
-                name: hook-binding
-              patch: |-
-                - op: add
-                  path: /subjects/0/namespace
-                  value: "3scale"
-                - op: add
-                  path: /subjects/1/namespace
-                  value: "apicast-gateway"
+                  value: "{{namespace}}"
       destination:
         server: "{{server}}"
-        namespace: "3scale"
+        namespace: "{{namespace}}"
       syncPolicy:
         syncOptions:
           - CreateNamespace=true
         #automated:
-          #prune: true
-          #selfHeal: true
+        #prune: true
+        #selfHeal: true

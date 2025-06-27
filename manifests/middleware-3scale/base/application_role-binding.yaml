@@ -5,12 +5,15 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "3"
 subjects:
-  - kind: ServiceAccount
-    name: hook-sa
-    namespace: ""
-  - kind: ServiceAccount
-    name: hook-sa
-    namespace: ""
+  - name: hook-sa
+    kind: ServiceAccount
+    namespace: "3scale"
+  - name: hook-sa-tenant-dev
+    kind: ServiceAccount
+    namespace: "3scale-tenant-dev"
+  - name: hook-sa-tenant-dev
+    kind: ServiceAccount
+    namespace: "3scale-tenant-testing"
 roleRef:
   kind: Role
   name: hook-role

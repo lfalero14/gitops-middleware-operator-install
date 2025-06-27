@@ -7,10 +7,16 @@ metadata:
     argocd.argoproj.io/sync-wave: "0"
 spec:
   generators:
-    - clusters:
-        selector:
-          matchLabels:
-            env: noprod
+    - matrix:
+        generators:
+          - clusters:
+              selector:
+                matchLabels:
+                  env: noprod
+          - list:
+              elements:
+                - namespace: 3scale-tenant-dev
+                - namespace: 3scale-tenant-testing
   template:
     metadata:
       name: "{{name}}-apicast-install"
@@ -28,17 +34,17 @@ spec:
               patch: |-
                 - op: add
                   path: /spec/targetNamespaces/0
-                  value: "apicast-gateway"
+                  value: "{{namespace}}"
             - target:
                 kind: RoleBinding
                 name: hook-binding
               patch: |-
                 - op: add
                   path: /subjects/0/namespace
-                  value: "apicast-gateway"
+                  value: "{{namespace}}"
       destination:
         server: "{{server}}"
-        namespace: "apicast-gateway"
+        namespace: "{{namespace}}"
       syncPolicy:
         syncOptions:
           - CreateNamespace=true

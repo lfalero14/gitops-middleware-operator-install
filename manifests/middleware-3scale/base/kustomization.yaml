@@ -4,6 +4,8 @@ bases:
   - ../../middleware-base
 resources:
   - operator_namespace.yaml
+  - operator_namespace-tenant-dev.yaml
+  - operator_namespace-tenant-testing.yaml
   - operator_operatorgroup.yaml
   - operator_post-hook.yaml
 patchesStrategicMerge:
