@@ -20,7 +20,7 @@ spec:
                 - namespace: 3scale-tenant-testing
   template:
     metadata:
-      name: "{{name}}-3scale-install"
+      name: "{{name}}-{{namespace}}-install"
     spec:
       project: default
       source:
