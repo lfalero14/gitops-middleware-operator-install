@@ -7,20 +7,13 @@ metadata:
     argocd.argoproj.io/sync-wave: "0"
 spec:
   generators:
-    - matrix:
-        generators:
-          - clusters:
-              selector:
-                matchLabels:
-                  env: noprod
-          - list:
-              elements:
-                - namespace: 3scale
-                - namespace: 3scale-tenant-dev
-                - namespace: 3scale-tenant-testing
+    - clusters:
+        selector:
+          matchLabels:
+            env: noprod
   template:
     metadata:
-      name: "{{name}}-{{namespace}}-apicast"
+      name: "{{name}}-apicast-install"
     spec:
       project: default
       source:
@@ -29,10 +22,10 @@ spec:
         path: "./manifests/middleware-apicast/overlays/noprod"
       destination:
         server: "{{server}}"
-        namespace: "{{namespace}}"
+        namespace: "3scale"
       syncPolicy:
         syncOptions:
           - CreateNamespace=true
         #automated:
-          #prune: true
-          #selfHeal: true
+        # prune: true
+        # selfHeal: true
