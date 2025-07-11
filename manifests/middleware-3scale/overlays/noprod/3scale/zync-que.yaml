@@ -11,9 +11,68 @@ spec:
             - name: zync-ca-bundle
               mountPath: /etc/pki/tls/zync/zync.pem
               subPath: zync.pem
+          resources:
+            limits:
+              cpu: '1'
+              memory: 512Mi
+            requests:
+              cpu: 250m
+              memory: 250M
+          terminationMessagePath: /dev/termination-log
+          command:
+            - /usr/bin/bash
+          livenessProbe:
+            httpGet:
+              path: /metrics
+              port: 9394
+              scheme: HTTP
+            initialDelaySeconds: 10
+            timeoutSeconds: 60
+            periodSeconds: 10
+            successThreshold: 1
+            failureThreshold: 3
           env:
+            - name: RAILS_LOG_TO_STDOUT
+              value: 'true'
+            - name: RAILS_ENV
+              value: production
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: zync
+                  key: DATABASE_URL
+            - name: SECRET_KEY_BASE
+              valueFrom:
+                secretKeyRef:
+                  name: zync
+                  key: SECRET_KEY_BASE
+            - name: ZYNC_AUTHENTICATION_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: zync
+                  key: ZYNC_AUTHENTICATION_TOKEN
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: metadata.name
+            - name: POD_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: metadata.namespace
             - name: SSL_CERT_FILE
               value: /etc/pki/tls/zync/zync.pem
+          ports:
+            - name: metrics
+              containerPort: 9394
+              protocol: TCP
+          imagePullPolicy: Always
+          terminationMessagePolicy: File
+          image: 'registry.redhat.io/3scale-amp2/zync-rhel9@sha256:5dcd615927562a801dc4d429b7a38457fec1490e00529f3971d31c6095048487'
+          args:
+            - '-c'
+            - 'bundle exec rake ''que[--worker-count 10]'''            
       volumes:
         - name: zync-ca-bundle
           configMap:
