@@ -8,9 +8,9 @@ resources:
   - operator_subscription.yaml
   - operator_post-hook.yaml
 
-patchesStrategicMerge:
-  - application_role-binding.yaml
-  - zync-que.yaml
+#patchesStrategicMerge:
+#  - application_role-binding.yaml
+#  - zync-que.yaml
 
 configMapGenerator:
   - name: zync-ca-bundle
@@ -29,3 +29,8 @@ generatorOptions:
 #      name: zync-que
 #      labelSelector: "threescale_component_element=zync-que"
 #  - path: application_role-binding.yaml
+
+
+patches:
+  - path: application_role-binding.yaml
+  - path: zync-que-ssl-patch.yaml
