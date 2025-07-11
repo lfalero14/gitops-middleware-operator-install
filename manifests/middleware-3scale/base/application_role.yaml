@@ -25,7 +25,7 @@ rules:
     verbs: ["get", "list", "watch"]
   - apiGroups: [""]
     resources: ["secrets"]
-    verbs: ["get", "list", "create", "delete"]    
+    verbs: ["get", "list", "create", "delete"]
   - apiGroups: ["operators.coreos.com"]
     resources: ["subscriptions"]
     verbs: ["get", "list"]
@@ -38,4 +38,6 @@ rules:
   - apiGroups: ["apps"]
     resources: ["deployments"]
     verbs: ["get", "list", "patch", "update"]
-
+  - apiGroups: [""]
+    resources: ["pods"]
+    verbs: ["get", "list", "delete"]
