@@ -20,17 +20,12 @@ configMapGenerator:
 generatorOptions:
   disableNameSuffixHash: true
 
-#patches:
-#  - path: zync-que.yaml
-#    target:
-#      group: apps.openshift.io
-#      version: v1
-#      kind: Deployment
-#      name: zync-que
-#      labelSelector: "threescale_component_element=zync-que"
-#  - path: application_role-binding.yaml
-
-
 patches:
+  - path: zync-que.yaml
+    target:
+      group: apps
+      version: v1
+      kind: Deployment
+      name: zync-que
+      labelSelector: "threescale_component_element=zync-que"
   - path: application_role-binding.yaml
-  - path: zync-que-ssl-patch.yaml
