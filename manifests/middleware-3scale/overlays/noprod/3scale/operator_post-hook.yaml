@@ -10,7 +10,7 @@ spec:
     spec:
       serviceAccountName: hook-sa
       containers:
-        - name: update-zync-que
+        - name: patch-zync-que
           image: image-registry.openshift-image-registry.svc:5000/openshift/cli:latest
           command:
             - /bin/bash
