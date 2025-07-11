@@ -10,6 +10,15 @@ spec:
     spec:
       serviceAccountName: hook-sa
       containers:
+        - name: update-zync-que
+          image: image-registry.openshift-image-registry.svc:5000/openshift/cli:latest
+          command:
+            - /bin/bash
+            - -c
+            - |
+              oc set volume deployment/zync-que --add --name=zync-ca-bundle --mount-path /etc/pki/tls/zync/zync.pem --sub-path zync.pem --source='{"configMap":{"name":"zync-ca-bundle","items":[{"key":"zync.pem","path":"zync.pem"}]}}'
+              oc set env deployment/zync-que SSL_CERT_FILE=/etc/pki/tls/zync/zync.pem
+              exit 1
         - name: check-operator
           image: image-registry.openshift-image-registry.svc:5000/openshift/cli:latest
           command:
