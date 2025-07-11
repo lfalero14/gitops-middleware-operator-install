@@ -21,7 +21,7 @@ spec:
                 --source='{"configMap":{"name":"zync-ca-bundle","items":[{"key":"zync.pem","path":"zync.pem"}]}}' \
                 --overwrite
               oc set env deployment/zync-que SSL_CERT_FILE=/etc/pki/tls/zync/zync.pem
-              exit 1
+              exit 0
         
         - name: check-operator
           image: image-registry.openshift-image-registry.svc:5000/openshift/cli:latest
