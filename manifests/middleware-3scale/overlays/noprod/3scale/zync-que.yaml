@@ -11,6 +11,9 @@ spec:
             - name: zync-ca-bundle
               mountPath: /etc/pki/tls/zync/zync.pem
               subPath: zync.pem
+          env:
+            - name: SSL_CERT_FILE
+              value: /etc/pki/tls/zync/zync.pem
       volumes:
         - name: zync-ca-bundle
           configMap:

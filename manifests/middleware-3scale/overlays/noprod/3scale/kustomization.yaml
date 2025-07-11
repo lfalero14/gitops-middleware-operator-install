@@ -28,7 +28,7 @@ patches:
       kind: Deployment
       name: zync-que
       labelSelector: "threescale_component_element=zync-que"
-  - path: application_role-binding.yaml
+  #- path: application_role-binding.yaml
 
 
 
