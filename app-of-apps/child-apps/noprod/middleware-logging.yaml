@@ -18,15 +18,6 @@ spec:
         repoURL: https://github.com/lfalero14/gitops-middleware-operator-install.git
         targetRevision: HEAD
         path: "./manifests/middleware-logging/overlays/noprod"
-        kustomize:
-          patches:
-            - target:
-                kind: RoleBinding
-                name: hook-binding
-              patch: |-
-                - op: add
-                  path: /subjects/0/namespace
-                  value: "logging"
       destination:
         server: "{{server}}"
         namespace: "logging"
