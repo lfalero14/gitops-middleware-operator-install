@@ -7,7 +7,7 @@ metadata:
 spec:
   channel: stable-6.3
   installPlanApproval: Automatic
-  name: logging-operator
+  name: cluster-logging
   source: redhat-operators
   sourceNamespace: openshift-marketplace
   startingCSV: cluster-logging.v6.3.0
