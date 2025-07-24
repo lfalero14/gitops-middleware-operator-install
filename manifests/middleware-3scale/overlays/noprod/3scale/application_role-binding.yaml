@@ -7,10 +7,13 @@ metadata:
 subjects:
   - kind: ServiceAccount
     name: hook-sa
-    namespace: ""
+    namespace: "3scale"
   - kind: ServiceAccount
     name: hook-sa
-    namespace: ""
+    namespace: "3scale-tenant-dev"
+  - kind: ServiceAccount
+    name: hook-sa
+    namespace: "3scale-tenant-testing"
 roleRef:
   kind: Role
   name: hook-role

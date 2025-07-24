@@ -5,4 +5,5 @@ metadata:
     argocd.argoproj.io/sync-wave: "2"
   name: rhbk-operator
 spec:
-  targetNamespaces: []
+  targetNamespaces:
+    - keycloak

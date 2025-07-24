@@ -4,5 +4,5 @@ bases:
   - ../../middleware-base
 resources:
   - operator_namespace.yaml
-  - operator_operatorgroup.yaml  
+  - operator_operatorgroup.yaml
   - operator_post-hook.yaml

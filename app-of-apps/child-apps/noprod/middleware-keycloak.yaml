@@ -3,8 +3,6 @@ kind: ApplicationSet
 metadata:
   name: noprod-child-keycloak-install
   namespace: openshift-gitops
-  annotations:
-    argocd.argoproj.io/sync-wave: "0"
 spec:
   generators:
     - clusters:
@@ -23,13 +21,6 @@ spec:
         kustomize:
           patches:
             - target:
-                kind: OperatorGroup
-                name: rhbk-operator
-              patch: |-
-                - op: add
-                  path: /spec/targetNamespaces/0
-                  value: "keycloak"
-            - target:
                 kind: RoleBinding
                 name: hook-binding
               patch: |-
@@ -42,6 +33,7 @@ spec:
       syncPolicy:
         syncOptions:
           - CreateNamespace=true
-        automated:
-          prune: true
-          selfHeal: true
+        #automated:
+        #  prune: true
+        #  selfHeal: true
+        #  allowEmpty: false
