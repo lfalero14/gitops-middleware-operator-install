@@ -3,4 +3,4 @@ kind: Kustomization
 bases:
   - ../../middleware-base
 resources:
-  - application-local_role-binding
+  - application-local_role-binding.yaml
