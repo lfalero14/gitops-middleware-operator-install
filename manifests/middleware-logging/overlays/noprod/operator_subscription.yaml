@@ -3,11 +3,11 @@ kind: Subscription
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "3"
-  name: cluster-logging
+  name: logging-operator
 spec:
   channel: stable-6.3
   installPlanApproval: Automatic
-  name: cluster-logging
+  name: logging-operator
   source: redhat-operators
   sourceNamespace: openshift-marketplace
   startingCSV: cluster-logging.v6.3.0

@@ -3,6 +3,6 @@ kind: OperatorGroup
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "2"
-  name: openshift-logging
+  name: logging-operator
 spec:
   upgradeStrategy: Default
