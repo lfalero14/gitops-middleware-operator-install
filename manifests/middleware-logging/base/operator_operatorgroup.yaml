@@ -5,5 +5,4 @@ metadata:
     argocd.argoproj.io/sync-wave: "2"
   name: openshift-logging
 spec:
-  namespaces:
-    - ""
+  upgradeStrategy: Default
