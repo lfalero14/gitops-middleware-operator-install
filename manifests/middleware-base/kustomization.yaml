@@ -4,3 +4,4 @@ resources:
   - application_service-account.yaml
   - application_role.yaml
   - application_role-binding.yaml
+  - application-local_role-binding.yaml #tmp

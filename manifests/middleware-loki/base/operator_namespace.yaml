@@ -2,8 +2,8 @@ apiVersion: v1
 kind: Namespace
 metadata:
   annotations:
-    openshift.io/display-name: "Openshift Logging"
-    openshift.io/description: "Red Hat OpenShift Logging"
+    openshift.io/display-name: "Openshift Operators Redhat"
+    openshift.io/description: "Loki Operator"
     #openshift.io/node-selector: node-role.kubernetes.io/worker-keycloak=
     argocd.argoproj.io/sync-wave: "0"
-  name: openshift-logging
+  name: openshift-operators-redhat
