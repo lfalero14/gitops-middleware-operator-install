@@ -1,12 +1,13 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-bases:
-  - ../../../base
+#bases:
+#  - ../../../base
 resources:
   - operator_namespace.yaml
   - operator_operatorgroup.yaml
   - operator_subscription.yaml
   - operator_post-hook.yaml
+  - application-local_role-binding.yaml
 
 patches:
   - path: application_role-binding.yaml
