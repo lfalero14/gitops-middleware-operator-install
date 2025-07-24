@@ -20,7 +20,7 @@ spec:
         path: "./manifests/middleware-logging/overlays/noprod"
       destination:
         server: "{{server}}"
-        namespace: "logging"
+        namespace: "openshift-logging"
       syncPolicy:
         syncOptions:
           - CreateNamespace=true
