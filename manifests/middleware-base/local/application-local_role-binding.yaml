@@ -11,4 +11,4 @@ subjects:
 roleRef:
   kind: ClusterRole
   apiGroup: rbac.authorization.k8s.io
-  name: cluster-admin
+  name: admin
