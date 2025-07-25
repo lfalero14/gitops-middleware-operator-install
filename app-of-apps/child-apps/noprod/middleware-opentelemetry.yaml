@@ -1,0 +1,30 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: noprod-child-opentelemetry-install
+  namespace: openshift-gitops
+spec:
+  generators:
+    - clusters:
+        selector:
+          matchLabels:
+            env: noprod
+  template:
+    metadata:
+      name: "{{name}}-opentelemetry-install"
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/lfalero14/gitops-middleware-operator-install.git
+        targetRevision: HEAD
+        path: "./manifests/middleware-opentelemetry/overlays/noprod"
+      destination:
+        server: "{{server}}"
+        namespace: "openshift-opentelemetry-operator"
+      syncPolicy:
+        syncOptions:
+          - CreateNamespace=true
+        #automated:
+        #  prune: true
+        #  selfHeal: true
+        #  allowEmpty: false

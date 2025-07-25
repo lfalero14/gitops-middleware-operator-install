@@ -3,11 +3,11 @@ kind: Subscription
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "3"
-  name: logging-operator
+  name: opentelemetry-operator
 spec:
-  channel: stable-6.3
+  channel: stable
   installPlanApproval: Automatic
-  name: cluster-logging
+  name: opentelemetry-product
   source: redhat-operators
   sourceNamespace: openshift-marketplace
-  startingCSV: cluster-logging.v6.3.0
+  startingCSV: opentelemetry-operator.v0.127.0-2
