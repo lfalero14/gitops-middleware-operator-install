@@ -1,0 +1,30 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: noprod-child-tempo-install
+  namespace: openshift-gitops
+spec:
+  generators:
+    - clusters:
+        selector:
+          matchLabels:
+            env: noprod
+  template:
+    metadata:
+      name: "{{name}}-tempo-install"
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/lfalero14/gitops-middleware-operator-install.git
+        targetRevision: HEAD
+        path: "./manifests/middleware-tempo/overlays/noprod"
+      destination:
+        server: "{{server}}"
+        namespace: "openshift-tempo-operator"
+      syncPolicy:
+        syncOptions:
+          - CreateNamespace=true
+        #automated:
+        #  prune: true
+        #  selfHeal: true
+        #  allowEmpty: false
