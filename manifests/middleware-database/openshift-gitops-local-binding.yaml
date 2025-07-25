@@ -3,7 +3,7 @@ kind: ClusterRoleBinding
 metadata:
   name: openshift-gitops-local-binding
   annotations:
-    argocd.argoproj.io/sync-wave: "1"
+    argocd.argoproj.io/sync-wave: "0"
 subjects:
   - kind: ServiceAccount
     name: openshift-gitops-argocd-application-controller
