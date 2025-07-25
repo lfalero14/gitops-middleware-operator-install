@@ -15,4 +15,4 @@ patches:
       group: batch
       version: v1
       kind: Job
-      name: post-sync-check-keycloak-operator
+      name: post-sync-check-operator

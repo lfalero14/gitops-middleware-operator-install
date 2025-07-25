@@ -1,4 +1,14 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-resources:
-  - operator_post-hook.yaml
+bases:
+  - ../../middleware-base
+patches:
+  - patch: |-
+      - op: replace
+        path: /spec/template/spec/containers/0/env/0/value
+        value: apicast-operator
+    target:
+      group: batch
+      version: v1
+      kind: Job
+      name: post-sync-check-operator
