@@ -5,4 +5,14 @@ bases:
 resources:
   - operator_namespace.yaml
   - operator_operatorgroup.yaml
-  - operator_post-hook.yaml
+
+patches:
+  - patch: |-
+      - op: replace
+        path: /spec/template/spec/containers/0/env/0/value
+        value: rhbk-operator
+    target:
+      group: batch
+      version: v1
+      kind: Job
+      name: post-sync-check-keycloak-operator
