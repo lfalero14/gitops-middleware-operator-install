@@ -1,5 +1,5 @@
 apiVersion: rbac.authorization.k8s.io/v1
-kind: RoleBinding
+kind: ClusterRoleBinding
 metadata:
   name: openshift-gitops-local-binding
   annotations:
@@ -11,4 +11,4 @@ subjects:
 roleRef:
   kind: ClusterRole
   apiGroup: rbac.authorization.k8s.io
-  name: admin
+  name: cluster-admin
