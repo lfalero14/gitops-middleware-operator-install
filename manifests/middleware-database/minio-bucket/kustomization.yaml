@@ -1,0 +1,11 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - create-bucket-registry.yaml
+  - create-bucket-loki.yaml
+  - create-bucket-observability.yaml
+
+commonAnnotations:
+  argocd.argoproj.io/sync-wave: "2"
+  argocd.argoproj.io/hook: PostSync
+  argocd.argoproj.io/hook-delete-policy: HookSucceeded

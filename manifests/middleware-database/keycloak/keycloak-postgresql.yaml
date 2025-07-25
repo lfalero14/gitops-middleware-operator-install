@@ -1,0 +1,59 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: operator-keycloak-storage
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+  storageClassName: gp3-csi #change
+  volumeMode: Filesystem
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: operator-keycloak-db
+spec:
+  serviceName: operator-keycloak-db-service
+  selector:
+    matchLabels:
+      app: operator-keycloak-db
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: operator-keycloak-db
+    spec:
+      containers:
+        - name: operator-keycloak-db
+          image: docker.io/postgres:16.4
+          volumeMounts:
+            - mountPath: /data
+              name: cache-volume
+          env:
+            - name: POSTGRES_USER
+              value: adminkeycloak
+            - name: POSTGRES_PASSWORD
+              value: redhat
+            - name: PGDATA
+              value: /data/pgdata
+            - name: POSTGRES_DB
+              value: keycloakBD
+      volumes:
+        - name: cache-volume
+          persistentVolumeClaim:
+            claimName: operator-keycloak-storage
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: operator-keycloak-db
+spec:
+  selector:
+    app: operator-keycloak-db
+  type: LoadBalancer
+  ports:
+    - port: 5432
+      targetPort: 5432

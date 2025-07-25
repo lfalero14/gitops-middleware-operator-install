@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: noprod-child-local-install
+  name: noprod-child-database-install
   namespace: openshift-gitops
 spec:
   generators:
@@ -11,16 +11,16 @@ spec:
             env: noprod
   template:
     metadata:
-      name: "{{name}}-local-install"
+      name: "{{name}}-database-install"
     spec:
       project: default
       source:
         repoURL: https://github.com/lfalero14/gitops-middleware-operator-install.git
         targetRevision: HEAD
-        path: "./manifests/middleware-local"
+        path: "./manifests/middleware-database"
       destination:
         server: "{{server}}"
-        namespace: default
+        namespace: "database"
         #automated:
         #  prune: true
         #  selfHeal: true

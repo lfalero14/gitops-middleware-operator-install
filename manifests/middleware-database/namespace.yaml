@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    openshift.io/display-name: "Database"
+    openshift.io/description: "Database"
+    #openshift.io/node-selector: node-role.kubernetes.io/worker=
+    argocd.argoproj.io/sync-wave: "0"
+  name: database

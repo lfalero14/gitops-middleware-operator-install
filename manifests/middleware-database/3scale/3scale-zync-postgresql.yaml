@@ -1,0 +1,59 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: operator-3scale-zync-storage
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+  storageClassName: gp3-csi #change
+  volumeMode: Filesystem
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: operator-3scale-zync-db
+spec:
+  serviceName: operator-3scale-zync-db-service
+  selector:
+    matchLabels:
+      app: operator-3scale-zync-db
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: operator-3scale-zync-db
+    spec:
+      containers:
+        - name: operator-3scale-zync-db
+          image: docker.io/postgres:16.4
+          volumeMounts:
+            - mountPath: /data
+              name: cache-volume
+          env:
+            - name: POSTGRES_USER
+              value: adminzync
+            - name: POSTGRES_PASSWORD
+              value: redhat
+            - name: PGDATA
+              value: /data/pgdata
+            - name: POSTGRES_DB
+              value: zync_production
+      volumes:
+        - name: cache-volume
+          persistentVolumeClaim:
+            claimName: operator-3scale-zync-storage
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: operator-3scale-zync-db
+spec:
+  selector:
+    app: operator-3scale-zync-db
+  type: LoadBalancer
+  ports:
+    - port: 5432
+      targetPort: 5432
